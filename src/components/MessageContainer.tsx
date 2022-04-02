@@ -9,7 +9,7 @@ const MessageContainer = () => {
         fluid
         padding={0}
         m={0}
-        className=' h-full block'
+        className=' h-full block overflow-y-scroll'
       >
           <Message/>
           <Message/>
