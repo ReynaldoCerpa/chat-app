@@ -1,7 +1,7 @@
 {
-  "name": "rga-electron",
-  "productName": "Registro guías",
-  "description": "Electron React App built for caracol science museum to check tour guides check-ins and outs",
+  "name": "chat-app",
+  "productName": "Chat app",
+  "description": "Encrypted chat app made for local network interactions",
   "scripts": {
     "build": "concurrently \"yarn build:main\" \"yarn build:renderer\"",
     "build:main": "cross-env NODE_ENV=production webpack --config ./.erb/configs/webpack.config.main.prod.babel.js",
@@ -31,8 +31,8 @@
     ]
   },
   "build": {
-    "productName": "Registro guías",
-    "appId": "org.rga.app",
+    "productName": "Chat app",
+    "appId": "org.chat.app",
     "files": [
       "dist/",
       "node_modules/",
@@ -87,7 +87,7 @@
     "publish": {
       "provider": "github",
       "owner": "Reynaldo",
-      "repo": "rga-electron"
+      "repo": "chat-app"
     }
   },
   "repository": {
@@ -250,6 +250,7 @@
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.2.2",
     "regenerator-runtime": "^0.13.5",
+    "socket.io-client": "^4.4.1",
     "source-map-support": "^0.5.19"
   },
   "devEngines": {

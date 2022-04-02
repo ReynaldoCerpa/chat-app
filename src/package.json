@@ -1,8 +1,8 @@
 {
-  "name": "registro-guias",
-  "productName": "Registro guías",
-  "version": "1.2.0",
-  "description": "Electron React App built for caracol science museum to check tour guides check-ins and outs",
+  "name": "chat-app",
+  "productName": "Chat app",
+  "version": "0.1.0",
+  "description": "Encrypted chat app made for local network interactions",
   "main": "./main.prod.js",
   "author": {
     "name": "Reynaldo Cerpa",

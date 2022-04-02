@@ -1,6 +1,7 @@
 import { Avatar, Button, Container, Input, ThemeIcon } from '@mantine/core'
 import { IoSend } from "react-icons/io5";
 import React from 'react'
+import { socket } from '../utils/socket.utils';
 
 const InputSection = () => {
   return (
@@ -26,6 +27,12 @@ const InputSection = () => {
             >
                 <IoSend
                     className=' text-lg'
+                    onClick={()=>{
+                        socket.emit("client:message")
+                        socket.on("server:newmessage", (msg) => {
+                            console.log(msg);
+                          })
+                    }}
                 />
 
             </ThemeIcon>
