@@ -10,10 +10,6 @@ export const socket = socketioClient(`http://192.168.1.64:8080`, {
     rejectUnauthorized: false
 })
 
-socket.on("server:newmessage",(msg: string)=>{
-    console.log(msg);
-    
-})
 
 export const newMessage = (input: string) => {
     socket.emit("client:message", input)
