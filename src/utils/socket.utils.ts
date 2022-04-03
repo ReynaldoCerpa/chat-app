@@ -12,5 +12,5 @@ export const socket = socketioClient(`http://192.168.1.64:8080`, {
 
 
 export const newMessage = (input: string) => {
-    socket.emit("client:message", input)
+    socket.emit("client:message", {input: input, username: "Reynaldo", id: socket.id})
 }
