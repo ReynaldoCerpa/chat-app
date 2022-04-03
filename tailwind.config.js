@@ -9,7 +9,9 @@ module.exports = {
       colors: {
         gray: color.trueGray,
         blue: "#08406e",
-        background: "#dce3e2"
+        background: "#1d2024",
+        ownMessage: "#1a6beb",
+        extraMessage: "#4b5057"
       },
     },
   },

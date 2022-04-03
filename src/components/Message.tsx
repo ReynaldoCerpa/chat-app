@@ -1,7 +1,15 @@
 import { Text, Container, Spoiler } from '@mantine/core'
 import React from 'react'
 
-const Message = ({message , username}: MessageProps) => {
+const Message = ({message , username, ownMessage}: MessageProps) => {
+
+  let alignment = (ownMessage) 
+    ? "flex flex-col items-end w-full" 
+    : "flex flex-col items-start w-full"
+  let bgColor = (ownMessage) 
+    ? " break-words max-w-md bg-ownMessage p-3 rounded-2xl text-white" 
+    : " break-words max-w-md bg-extraMessage p-3 rounded-2xl text-white" 
+
   return (
       <Container
         fluid
@@ -10,17 +18,18 @@ const Message = ({message , username}: MessageProps) => {
 
         <Container
             fluid
-            className="flex flex-col items-end w-full"
+            className={alignment}
         >
             <Text
                 size="md"
+                className='text-white'
             >{username}</Text>
 
             <Spoiler 
                 maxHeight={120} 
                 showLabel="Mostrar más" 
                 hideLabel="Hide"
-                className=" break-words max-w-md bg-yellow-100 p-3 rounded-2xl"
+                className={bgColor}
             >
               {message}
             </Spoiler>
@@ -31,7 +40,8 @@ const Message = ({message , username}: MessageProps) => {
 
 type MessageProps = {
   message: string,
-  username: string
+  username: string,
+  ownMessage: boolean,
 }
 
 export default Message

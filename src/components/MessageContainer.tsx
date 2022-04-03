@@ -9,6 +9,8 @@ const MessageContainer = () => {
 
   useEffect(()=>{
     socket.on("server:newmessage",(msg: string)=>{
+      console.log(socket.id);
+      
       console.log(msg);
       setMessageList([...messageList, {message: msg, username: "Reynaldo"}])
     })
@@ -22,7 +24,7 @@ const MessageContainer = () => {
       >
         {messageList.length > 1 ?
           messageList.slice(1).map((msg)=>{
-            return <Message message={msg.message} username={msg.username} />
+            return <Message message={msg.message} username={msg.username} ownMessage={false}/>
           })
           : null
         }
