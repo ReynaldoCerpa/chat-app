@@ -7,8 +7,8 @@ const Message = ({message , username, ownMessage}: MessageProps) => {
     ? "flex flex-col items-end w-full" 
     : "flex flex-col items-start w-full"
   let bgColor = (ownMessage) 
-    ? " break-words max-w-md bg-ownMessage p-3 rounded-2xl text-white" 
-    : " break-words max-w-md bg-extraMessage p-3 rounded-2xl text-white" 
+    ? " break-words max-w-sm bg-ownMessage p-3 rounded-2xl text-white" 
+    : " break-words max-w-sm bg-extraMessage p-3 rounded-2xl text-white" 
 
   return (
       <Container

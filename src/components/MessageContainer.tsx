@@ -19,11 +19,13 @@ const MessageContainer = () => {
       <Container
         fluid
         padding={0}
-        className=' h-full block overflow-y-scroll m-0'
+        className=' h-full block overflow-y-scroll  m-0'
       >
         {messageList.length > 1 ?
           messageList.slice(1).map((msg)=>{
-            return <Message message={msg.message} username={msg.username} ownMessage={msg.ownMessage}/>
+            if(msg.username !== ''){
+              return <Message message={msg.message} username={msg.username} ownMessage={msg.ownMessage}/>
+            }
           })
           : null
         }

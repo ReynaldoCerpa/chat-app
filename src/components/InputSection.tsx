@@ -24,6 +24,12 @@ const InputSection = () => {
                 variant='filled'
                 className='w-full focus:outline-none'
                 placeholder='Ingrese su mensaje' 
+                onKeyDown={(e:any) => {
+                    if (e.key === "Enter") {
+                        newMessage(input)
+                        setInput("")
+                    }
+                }}
             />
             <ThemeIcon
                 className='h-9 w-16 cursor-pointer ml-2'
