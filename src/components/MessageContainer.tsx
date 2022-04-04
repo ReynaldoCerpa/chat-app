@@ -2,28 +2,22 @@ import { Container } from '@mantine/core'
 import React, { useEffect, useState } from 'react'
 import { socket } from '../utils/socket.utils'
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux'
-import Message from './Message'
 import { MessageObject } from '../interfaces/interfaces'
+import Message from './Message'
 
 const MessageContainer = () => {
-  const messageList = useSelector((state: RootStateOrAny)=>state)
+  const response = useSelector((state: RootStateOrAny)=>state)
+  const [messageList, setMessageList] = useState([])
   const dispatch = useDispatch();
+  const addMessage = (message: MessageObject) => {
+      dispatch({type: "ADD_MESSAGE", payload: message})
+  }
   let keys = 0;
 
-  const addMessage = (message: MessageObject) => {
-    dispatch({type: "ADD_MESSAGE", payload: message})
-  }
-
-  useEffect(()=>{
-    console.log("Rendered");
-    
-    socket.on("server:newmessage",(msg: any)=>{
-      console.log(msg.input);
+  socket.on("server:newmessage",(msg: any)=>{
       let isOwnMessage = (socket.id === msg.id) ? true : false
       addMessage({message: msg.input, username: msg.username, ownMessage: isOwnMessage})
-      console.log(messageList);
-      
-    })
+      setMessageList(response)
   })
 
   return (
