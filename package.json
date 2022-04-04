@@ -249,7 +249,9 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.3.1",
+    "react-redux": "^7.2.8",
     "react-router-dom": "^6.2.2",
+    "redux": "^4.1.2",
     "regenerator-runtime": "^0.13.5",
     "socket.io-client": "^4.4.1",
     "source-map-support": "^0.5.19"

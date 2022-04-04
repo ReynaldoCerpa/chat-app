@@ -1,17 +1,28 @@
 import { Container } from '@mantine/core'
 import React, { useEffect, useState } from 'react'
 import { socket } from '../utils/socket.utils'
-import InputSection from './InputSection'
+import { RootStateOrAny, useSelector, useDispatch } from 'react-redux'
 import Message from './Message'
+import { MessageObject } from '../interfaces/interfaces'
 
 const MessageContainer = () => {
-  const [messageList, setMessageList] = useState([{message: '', username: '', ownMessage: false}])
+  const messageList = useSelector((state: RootStateOrAny)=>state)
+  const dispatch = useDispatch();
+  let keys = 0;
+
+  const addMessage = (message: MessageObject) => {
+    dispatch({type: "ADD_MESSAGE", payload: message})
+  }
 
   useEffect(()=>{
+    console.log("Rendered");
+    
     socket.on("server:newmessage",(msg: any)=>{
       console.log(msg.input);
       let isOwnMessage = (socket.id === msg.id) ? true : false
-      setMessageList([...messageList, {message: msg.input, username: msg.username, ownMessage: isOwnMessage}])
+      addMessage({message: msg.input, username: msg.username, ownMessage: isOwnMessage})
+      console.log(messageList);
+      
     })
   })
 
@@ -21,13 +32,12 @@ const MessageContainer = () => {
         padding={0}
         className=' h-full block overflow-y-scroll  m-0'
       >
-        {messageList.length > 1 ?
-          messageList.slice(1).map((msg)=>{
+        {
+          messageList.slice(1).map((msg: MessageObject)=>{
             if(msg.username !== ''){
-              return <Message message={msg.message} username={msg.username} ownMessage={msg.ownMessage}/>
+              return <Message key={keys++} message={msg.message} username={msg.username} ownMessage={msg.ownMessage}/>
             }
           })
-          : null
         }
       </Container>
   )
