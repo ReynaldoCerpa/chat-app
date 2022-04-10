@@ -4,7 +4,7 @@ const os = require("os")
 
 // Redux
 
-export const socket = socketioClient(`http://192.168.1.64:8080`, {
+export const socket = socketioClient(`http://192.168.1.75:8080`, {
     reconnectionDelay: 1000,
     reconnection: true,
     transports: ['websocket'],

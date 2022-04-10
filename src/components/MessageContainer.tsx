@@ -17,6 +17,7 @@ const MessageContainer = () => {
   socket.on("server:newmessage",(msg: any)=>{
       let isOwnMessage = (socket.id === msg.id) ? true : false
       addMessage({message: msg.input, username: msg.username, ownMessage: isOwnMessage})
+			setMessageList(response)
       console.log(response);
   })
 
