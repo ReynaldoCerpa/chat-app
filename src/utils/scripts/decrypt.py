@@ -1,4 +1,5 @@
 import sys
+import base64
 #print("Mugre basura")
 #print(sys.argv[1])
 
@@ -33,6 +34,10 @@ def traductor_mensaje(clave,mensa,accion):
             traducido.append(symbol)
     return ('').join(traducido)
     
-traducido=descifrar_mensaje("ayush",plain)
+msg_bytes = plain.encode("ascii")
+base64_bytes = base64.b64decode(msg_bytes)
+base64_msg = base64_bytes.decode("ascii")
+
+traducido = descifrar_mensaje("ayush", base64_msg)
 
 print(traducido)
