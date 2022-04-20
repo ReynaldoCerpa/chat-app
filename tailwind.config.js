@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       colors: {
         gray: color.trueGray,
-        blue: "#08406e",
+        darkblue: "#08406e",
         background: "#1d2024",
         ownMessage: "#1a6beb",
         extraMessage: "#4b5057"

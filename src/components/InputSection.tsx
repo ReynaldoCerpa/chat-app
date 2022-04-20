@@ -1,7 +1,7 @@
-import { Avatar, Button, Container, Input, ThemeIcon } from '@mantine/core'
+import { Container, Input, ThemeIcon } from '@mantine/core'
 import { IoSend } from "react-icons/io5";
-import React, { ChangeEvent, FormEvent, useState } from 'react'
-import { newMessage, socket } from '../utils/socket.utils';
+import React, { ChangeEvent, useState } from 'react'
+import { newMessage } from '../utils/socket.utils';
 
 const InputSection = () => {
     const [input, setInput] = useState("")
