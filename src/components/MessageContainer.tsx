@@ -4,21 +4,28 @@ import { socket } from '../utils/socket.utils'
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux'
 import { MessageObject } from '../interfaces/interfaces'
 import Message from './Message'
+import { PythonShell } from "python-shell"
 
 const MessageContainer = () => {
-  const response = useSelector((state: RootStateOrAny)=>state)
-  const [messageList, setMessageList] = useState([])
-  const dispatch = useDispatch();
-  const addMessage = (message: MessageObject) => {
-      dispatch({type: "ADD_MESSAGE", payload: message})
-  }
-  let keys = 0;
+  let i = 0;
+  const [messageList, setMessageList] = useState([{message: '', username: '', ownMessage: false}])
 
-  socket.on("server:newmessage",(msg: any)=>{
+  useEffect(()=>{
+    socket.on("server:newmessage",(msg: any)=>{
       let isOwnMessage = (socket.id === msg.id) ? true : false
-      addMessage({message: msg.input, username: msg.username, ownMessage: isOwnMessage})
-			setMessageList(response)
-      console.log(response);
+      
+      let options = {
+          scriptPath: 'src/utils/scripts/',
+          args: [msg.input]
+      };
+
+		PythonShell.run('decrypt.py', options, function(err, results:any){
+			if(err) throw err;
+      let decrypted = results
+      
+      setMessageList([...messageList, {message: decrypted, username: msg.username, ownMessage: isOwnMessage}])
+		})
+    })
   })
 
   return (
@@ -30,7 +37,7 @@ const MessageContainer = () => {
         {
           messageList.slice(1).map((msg: MessageObject)=>{
             if(msg.username !== ''){
-              return <Message key={keys++} message={msg.message} username={msg.username} ownMessage={msg.ownMessage}/>
+              return <Message key={i++} message={msg.message} username={msg.username} ownMessage={msg.ownMessage}/>
             }
           })
         }

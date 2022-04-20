@@ -1,17 +1,17 @@
-import socketioClient from "socket.io-client"
+import socketioClient, { Socket } from "socket.io-client"
 const ip = require("ip")
 const os = require("os")
 
-// Redux
-
-export const socket = socketioClient(`http://192.168.1.75:8080`, {
-    reconnectionDelay: 1000,
-    reconnection: true,
-    transports: ['websocket'],
-    agent: false,
-    upgrade: false,
-    rejectUnauthorized: false
+export const socket = socketioClient("http://192.168.1.75:8080", {
+		reconnectionDelay: 1000,
+		reconnection: true,
+		transports: ['websocket'],
+		agent: false,
+		upgrade: false,
+		rejectUnauthorized: false
 })
+
+
 
 
 export const newMessage = (input: string) => {
