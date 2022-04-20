@@ -3,15 +3,27 @@ import React, { useEffect, useState } from 'react'
 import { socket } from '../utils/socket.utils'
 import InputSection from './InputSection'
 import Message from './Message'
+import { PythonShell } from "python-shell"
 
 const MessageContainer = () => {
+  let i = 0;
   const [messageList, setMessageList] = useState([{message: '', username: '', ownMessage: false}])
 
   useEffect(()=>{
     socket.on("server:newmessage",(msg: any)=>{
-      console.log(msg.input);
       let isOwnMessage = (socket.id === msg.id) ? true : false
-      setMessageList([...messageList, {message: msg.input, username: msg.username, ownMessage: isOwnMessage}])
+      
+      let options = {
+          scriptPath: 'src/utils/scripts/',
+          args: [msg.input]
+      };
+
+		PythonShell.run('decrypt.py', options, function(err, results:any){
+			if(err) throw err;
+      let decrypted = results
+      
+      setMessageList([...messageList, {message: decrypted, username: msg.username, ownMessage: isOwnMessage}])
+		})
     })
   })
 
@@ -24,7 +36,7 @@ const MessageContainer = () => {
         {messageList.length > 1 ?
           messageList.slice(1).map((msg)=>{
             if(msg.username !== ''){
-              return <Message message={msg.message} username={msg.username} ownMessage={msg.ownMessage}/>
+              return <Message key={i++} message={msg.message} username={msg.username} ownMessage={msg.ownMessage}/>
             }
           })
           : null
